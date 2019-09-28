@@ -75,7 +75,40 @@ echo ${string} length is ${#string}
 # 提取字符串
 string="12345678910"
 length=${#string}
-echo ${string} of 1 to ${length} is ${string:7:${length}}
+echo ${string} of 1 to ${length} is ${string:1:${length}}
 
-# 
+# 查找字符串中特定的字符首次出现的位置
+string="123456789ksjcsgqgaldnaaljabckagdq"
+expr index ${string} 1  # 输出结果是1……竟然不是0……
+echo `expr index ${string} 1`  # 用反引号！！！！将命令的终端输出取出来
+echo ${expr index ${string} 1} # 报错，看来美元符号只能用来取变量的值，不能去表达式的值！！！
 
+
+# shell数组
+# shell中，用括号表示数组，数组中的元素使用空格符号进行分隔
+array_name=(1111 2222 3333 4444)
+file_name[0]=1
+file_name[1]=2
+file_name[6]=2 # 可以不使用连续的下标，而且下标的范围没有限制
+
+for name in ${array_name[@]}   # 千万不要忘记使用$取出变量名代表的数据！！！要不然直接当成一个字符串了！！！！
+do
+    echo ${name}
+done
+
+for name in ${file_name} # 使用@表示取出所有的元素，就只会表示取出第一个元素，和C++的数组指针有点相似的感觉
+do
+    echo ${name}
+done
+
+# 读取数组的元素，一般只通过${数组名[索引号]}的形式读取，如
+array_name=(1111 2222 3333 4444)
+echo ${array_name[0]} # 正常读取单个元素
+echo ${array_name[@]} # 读取出所有的元素，显然元素直接是以空格分隔的
+echo ${array_name} # 不写索引，就只读取第一个
+
+# 获取数组元素的个数
+echo ${#array_name[@]}
+
+# 获取数组中单个元素的长度
+echo ${#array_name[0]}
