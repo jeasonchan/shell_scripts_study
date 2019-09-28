@@ -67,3 +67,15 @@ your_name="jeason"
 str="hello,I am \"${your_name}\"!"
 echo ${str}
 # 可见，双引号里可以有变量，双引号里可以有转译符
+
+# 获取字符串长度
+string="123456789"
+echo ${string} length is ${#string}
+
+# 提取字符串
+string="12345678910"
+length=${#string}
+echo ${string} of 1 to ${length} is ${string:7:${length}}
+
+# 
+
